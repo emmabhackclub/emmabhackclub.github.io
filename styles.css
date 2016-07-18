@@ -4,9 +4,9 @@ img {
 body {
     background-image: url("http://vignette4.wikia.nocookie.net/powerlisting/images/9/9d/Pipes.jpg/revision/latest?cb=20140713230646");
     background-size: cover;
-    color: rgb(0, 0, 255);
+    color: yellow;
     text-align: center;
-    font-family: "Comic Sans";
+    font-family: "Courier 10 ";
 }
 h1 {
     color: red;
@@ -15,7 +15,11 @@ h1 {
   height: 180px;
   width: 300px;
  
+  -webkit-transition: all 1s ease;
      -moz-transition: all 1s ease;
+       -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+          transition: all 1s ease;
 
 }
 
