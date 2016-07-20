@@ -34,15 +34,13 @@ function draw() {
            stroke(color(rVal, gVal, bVal));
            ellipse(x, y, circleDiameter, circleDiameter);
            x = x + circleDiameter;
-           
-                 rVal = rVal - 2;
-      gVal = gVal + 7;
-      bVal = bVal + 3;
        }
       y = y - circleRadius;
       isShifted = !isShifted
       
-//
+      rVal = rVal - 2;
+      gVal = gVal + 7;
+      bVal = bVal + 3;
    }
 }
 
