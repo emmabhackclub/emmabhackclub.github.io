@@ -55,6 +55,3 @@ function keyPressed() {
     }
     return false;
 }
-if (mouseY) {
-    
-}
