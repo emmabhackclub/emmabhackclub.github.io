@@ -1,4 +1,4 @@
-var NUM_CIRCLES = 12;
+var NUM_CIRCLES = 24;
 var circleDiameter;
 var circleRadius
 var rVal;
@@ -6,42 +6,47 @@ var gVal;
 var bVal;
 
 function setup() {
-    createCanvas(480, 600);
-    circleDiameter = width/NUM_CIRCLES;
-    circleRadius = circleDiameter/2;
+    createCanvas(windowWidth, windowHeight);
+
+    circleDiameter = windowWidth / NUM_CIRCLES;
+    circleRadius = circleDiameter / 2;
 }
 
 function draw() {
-   var rVal = 255;
-   var gVal = 0;
-   var bVal = 0;
-   
-   var isShifted = false;
-   
-   var y = height;
-   while (y >= 0) {
-      
-       var x;
-       
-       if (isShifted) {
-           x = circleRadius;
-       } else {
-           x = 0;
-       }
-       
-       while (x <= width) {
-           fill(color(rVal, gVal, bVal));
-           stroke(color(rVal, gVal, bVal));
-           ellipse(x, y, circleDiameter, circleDiameter);
-           x = x + circleDiameter;
-       }
-      y = y - circleRadius;
-      isShifted = !isShifted
-      
-      rVal = rVal - 2;
-      gVal = gVal + 7;
-      bVal = bVal + 3;
-   }
+    gVal = windowWidth/mouseX * 255;
+    bVal = windowHeight/mouseY* 255;
+    rVal = 0
+
+    var isShifted = false;
+
+    var y = height;
+    while (y >= 0) {
+
+        var x;
+
+        if (isShifted) {
+            x = circleRadius;
+        }
+        else {
+            x = 0;
+        }
+
+        while (x <= width) {
+            stroke(color(rVal, gVal, bVal));
+            fill(color(rVal, gVal, bVal));
+            ellipse(x, y, circleDiameter, circleDiameter);
+            x = x + circleDiameter;
+        }
+        y = y - circleRadius;
+        isShifted = !isShifted
+        
+        
+        
+        rVal = (rVal + windowHeight/circleDiameter)
+        gVal = (gVal - windowHeight/circleDiameter)
+        bVal = (bVal - windowHeight/circleDiameter)
+    }
+    
 }
 
 function keyPressed() {
@@ -49,4 +54,7 @@ function keyPressed() {
         saveCanvas('geometric pattern', 'png')
     }
     return false;
+}
+if (mouseY) {
+    
 }
