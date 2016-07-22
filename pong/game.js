@@ -7,18 +7,19 @@ var enemyScore;
 
 function setup() {
     createCanvas(500, 300);
-    enemy = createSprite(5, 30, 10, 60);
-    player = createSprite((width-5), 30, 10, 60);
-    ball = createSprite((width/2), 30, 10, 10);
-    ballAngle = random(10,30);
+    enemy = createSprite(5, height/2, 10, 60);
+    player = createSprite((width-5), height/2, 10, 60);
+    ball = createSprite((width/2), height/2, 10, 10);
+    ballAngle = random(-30,30);
 }
 
 function draw() {
     background(0, 0, 0);
     stroke(255);
     line((width/2), 0, (width/2), height);
-    ball.setSpeed(4, ballAngle);
-    
+    ball.setSpeed(-4, ballAngle);
+    textColor("white");
+    text(ballAngle);
     player.shapeColor = "white";
     enemy.shapeColor = "white";
     ball.shapeColor = "white";
@@ -38,12 +39,12 @@ function draw() {
     //edges
     if (ball.position.y >= (height - 10)) {
         ball.position.y = (height - 15);
-        ballAngle = (-ballAngle);
+        ballAngle = (-ballAngle - random(5,10));
         console.log(ballAngle);
     }
     if (ball.position.y <= 10) {
         ball.position.y = 15;
-        ballAngle = (-ballAngle);
+        ballAngle = (-ballAngle - random(5,10));
         console.log(ballAngle);
     }
 
