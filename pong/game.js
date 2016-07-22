@@ -70,7 +70,7 @@ function draw() {
         player.position.y = height/2;
         ball.position.x = width/2;
         ball.position.y = height/2;
-        ballAngle = random(-25,25);
+        ballAngle = random(-25,5);
         console.log("restart");
     }
     drawSprites();

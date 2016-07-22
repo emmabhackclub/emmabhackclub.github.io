@@ -28,7 +28,7 @@ function draw() {
         gameOver();
     } else {
         background(backgroundImage);
-
+        
         if (keyDown(RIGHT_ARROW) && player.position.x < (width - (playerImage.width/2))) {
             player.position.x += 2;
         }
