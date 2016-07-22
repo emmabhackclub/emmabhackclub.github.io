@@ -17,7 +17,7 @@ function draw() {
     background(0, 0, 0);
     stroke(255);
     line((width/2), 0, (width/2), height);
-    ball.setSpeed(-4, ballAngle);
+    ball.setSpeed(-5, ballAngle);
     
     player.shapeColor = "white";
     enemy.shapeColor = "white";
@@ -49,18 +49,29 @@ function draw() {
 
     //player controls
     if (keyDown(DOWN_ARROW) && player.position.y < (height - 30)) {
-        player.position.y += 4;
+        player.position.y += 3;
     }
     if (keyDown(UP_ARROW) && player.position.y > 30) {
-        player.position.y -= 4;
+        player.position.y -= 3;
     }
 
     //enemy response
     if ((ball.position.y > enemy.position.y) && enemy.position.y <= (height - 30)) {
-        enemy.position.y = enemy.position.y + 2;
+        enemy.position.y = enemy.position.y + 1.75;
     }
     if (ball.position.y < enemy.position.y && (enemy.position.y >= 30)) {
-        enemy.position.y = enemy.position.y - 2;
+        enemy.position.y = enemy.position.y - 1.75;
+    }
+    
+    if (ball.position.x > (width+50) || (ball.position.x < -50)) {
+        enemy.position.x = 5;
+        enemy.position.y = height/2;
+        player.position.x = width-5;
+        player.position.y = height/2;
+        ball.position.x = width/2;
+        ball.position.y = height/2;
+        ballAngle = random(-30,30);
+        console.log("restart");
     }
     drawSprites();
 }
