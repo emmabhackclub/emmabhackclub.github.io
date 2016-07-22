@@ -10,7 +10,7 @@ function setup() {
     enemy = createSprite(5, height/2, 10, 60);
     player = createSprite((width-5), height/2, 10, 60);
     ball = createSprite((width/2), height/2, 10, 10);
-    ballAngle = random(-30,30);
+    ballAngle = random(-25,25);
 }
 
 function draw() {
@@ -27,23 +27,23 @@ function draw() {
     //sprites
     if (ball.overlap(player)) {
         ball.position.x = width - 20;
-        ballAngle = (180 - ballAngle - random(5,10));
+        ballAngle = (180 - (ballAngle + random(5,10)));
         console.log(ballAngle);
     }
     if (ball.overlap(enemy)) {
         ball.position.x = 20;
-        ballAngle = (180 - ballAngle - random(5,10));
+        ballAngle = (180 - (ballAngle + random(5,10)));
         console.log(ballAngle);
     }
     //edges
     if (ball.position.y >= (height - 10)) {
         ball.position.y = (height - 15);
-        ballAngle = (-ballAngle - random(5,10));
+        ballAngle = (-(ballAngle + random(5,10)));
         console.log(ballAngle);
     }
     if (ball.position.y <= 10) {
         ball.position.y = 15;
-        ballAngle = (-ballAngle - random(5,10));
+        ballAngle = (-(ballAngle + random(5,10)));
         console.log(ballAngle);
     }
 
@@ -70,7 +70,7 @@ function draw() {
         player.position.y = height/2;
         ball.position.x = width/2;
         ball.position.y = height/2;
-        ballAngle = random(-30,30);
+        ballAngle = random(-25,25);
         console.log("restart");
     }
     drawSprites();
