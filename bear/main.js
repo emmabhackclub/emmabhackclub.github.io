@@ -36,7 +36,7 @@ function draw() {
             text("The black bear grows stronger.\n You are now:\n\n GRIZZLY BEAR", width / 2, height / 4);
         }
         if (progression >= 5) {
-            text("Your choices are:\n\n a: catch fish in the river\n b: forage for berries in the woods\n c: head to the city and hunt\n  more tasty human meat", width / 2, height / 4);
+            text("You are hungry again.\n Your choices are:\n\n a: catch fish in the river\n b: forage for berries in the woods\n c: head to the city and hunt\n  more tasty human meat", width / 2, height / 4);
         }
     }
     //second level correct
@@ -68,7 +68,25 @@ function draw() {
             text("Do you continue to press north?", width / 2, height / 4);
         }
         if (progression >= 3) {
-            text("Your choices are\n\n a: return south\n b: remain in the north:", width / 2, height / 4);
+            text("Your choices are:\n\n a: return south b: remain in the north", width / 2, height / 4);
+        }
+    }
+    //fourth level correct
+    if (level == 4) {
+        if (progression == 0) {
+            text("It's the hardest endeavor of you ursid life,\n but you learn to live in the north.", width / 2, height / 4);
+        }
+        if (progression == 1) {
+            text("You become one with this harsh and beautiful landscape,\n living with it in perfect harmony.", width / 2, height / 4);
+        }
+        if (progression == 2) {
+            text("You grow stronger, fiercer, bolder.\n You are now:\n\n POLAR BEAR", width / 2, height / 4);
+        }
+        if (progression == 3) {
+            text("Living here is easy and pleasurable,\n but it offers no fulfillment.", width / 2, height / 4);
+        }
+        if (progression >= 4) {
+            text("Do you continue to reign as master of the north,\n or turn to even greater pursuits?", width / 2, height / 4);
         }
     }
     drawSprites();
@@ -87,8 +105,8 @@ function keyTyped() {
             level = 3;
             progression = 0;
     }
-    // if (key === 'b' && (level==3) && (progression >= 3)) {
-    //         level = 3;
-    //         progression = 0;
-    // }
+    if (key === 'b' && (level==3) && (progression >= 3)) {
+            level = 4;
+            progression = 0;
+    }
 }
