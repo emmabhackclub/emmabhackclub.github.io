@@ -25,7 +25,6 @@ function setup() {
 function draw() {
 
     if (isGameOver) {
-        console.log("overlap")
         gameOver();
     } else {
         background(backgroundImage);
