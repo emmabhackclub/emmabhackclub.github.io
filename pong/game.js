@@ -18,8 +18,7 @@ function draw() {
     stroke(255);
     line((width/2), 0, (width/2), height);
     ball.setSpeed(-4, ballAngle);
-    textColor("white");
-    text(ballAngle);
+    
     player.shapeColor = "white";
     enemy.shapeColor = "white";
     ball.shapeColor = "white";
