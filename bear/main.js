@@ -2,6 +2,7 @@ var bear;
 var progression;
 var backgroundImage;
 var backgroundImage2;
+var backgroundImage3;
 var level;
 
 function setup() {
@@ -11,6 +12,7 @@ function setup() {
     level = 1;
     backgroundImage1 = loadImage("river.png");
     backgroundImage2 = loadImage("woods.jpg");
+    backgroundImage3 = loadImage("snowscape.png");
 }
 
 function draw() {
@@ -41,13 +43,32 @@ function draw() {
     if (level == 2) {
         background(backgroundImage2);
         if (progression == 0) {
-            text("Berries are hard to find,\n and food is scarce.", width / 2, height / 4);
+            text("You forage for berries in the woods.", width / 2, height / 4);
         }
         if (progression == 1) {
-            text("You decide to leave the area.", width / 2, height / 4);
+            text("Berries are hard to find,\n and food is scarce.", width / 2, height / 4);
         }
         if (progression == 2) {
+            text("You decide to leave the area.", width / 2, height / 4);
+        }
+        if (progression >= 3) {
             text("Your choices are\n\n a: head south\n b: head north\n c: return to the river", width / 2, height / 4);
+        }
+    }
+    //third level correct
+    if (level == 3) {
+        background(backgroundImage3);
+        if (progression == 0) {
+            text("It's incredibly cold in the north,\n and food is hard to find.", width / 2, height / 4);
+        }
+        if (progression == 1) {
+            text("You begin to regret your decision.", width / 2, height / 4);
+        }
+        if (progression == 2) {
+            text("Do you continue to press north?", width / 2, height / 4);
+        }
+        if (progression >= 3) {
+            text("Your choices are\n\n a: return south\n b: remain in the north:", width / 2, height / 4);
         }
     }
     drawSprites();
@@ -58,8 +79,16 @@ function mouseClicked() {
 }
 
 function keyTyped() {
-    if ((key === 'b') && (level=1)) {
-        level = 2;
-        progression = 0;
+    if (key === 'b' && (level==1)) {
+            level = 2;
+            progression = 0;
     }
+    if (key === 'b' && (level==2) && (progression >= 3)) {
+            level = 3;
+            progression = 0;
+    }
+    // if (key === 'b' && (level==3) && (progression >= 3)) {
+    //         level = 3;
+    //         progression = 0;
+    // }
 }
