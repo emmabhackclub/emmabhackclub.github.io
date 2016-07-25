@@ -1,5 +1,5 @@
-var GRAVITY = 0.5;
-var JUMP = -5;
+var GRAVITY = 0.3;
+var JUMP = -3;
 var groundSprites;
 var GROUND_SPRITE_WIDTH = 50;
 var GROUND_SPRITE_HEIGHT = 50;
@@ -8,13 +8,15 @@ var player;
 var obstacleSprites;
 var isGameOver;
 var score;
+var size;
 
 function setup() {
     isGameOver = false;
     score = 0;
+    color = 0;
     
-    createCanvas(400, 300);
-    background(150, 200, 250);
+    createCanvas(500, 400);
+    background(0);
     groundSprites = new Group();
 
     numGroundSprites = width / GROUND_SPRITE_WIDTH + 1;
@@ -23,9 +25,10 @@ function setup() {
         groundSprites.add(groundSprite);
     }
 
-    player = createSprite(100, height - 75, 50, 50);
+    player = createSprite(100, height - 75, 40, 40);
 
     obstacleSprites = new Group();
+    size = 5;
 }
 
 function draw() {
@@ -33,11 +36,36 @@ function draw() {
         background(0);
         fill (255);
         textAlign(CENTER);
+        textFont("Courier");
+        if (score >= 7500) {
+            text("Wow. Wooooow.  I am impressed.\nI never thought anyone would actually get this far.", camera.position.x, camera.position.y-60);
+        }
+        else if (score >= 5000) {
+            text("Amazing!", camera.position.x, camera.position.y-40);
+        }
+        else if (score >= 4000) {
+            text("Excellent!", camera.position.x, camera.position.y-40);
+        }
+        else if (score >= 3000) {
+            text("Very well done!", camera.position.x, camera.position.y-40);
+        }
+        else if (score >= 2000) {
+            text("Good job!", camera.position.x, camera.position.y-40);
+        }
+        else if (score >= 1000) {
+            text("Pretty good.  Try again?", camera.position.x, camera.position.y-40);
+        }
+        else if (score >= 100) {
+            text("Eh, alright.  Try again?", camera.position.x, camera.position.y-40);
+        }
+        else if (score<100){
+            text("Let's pretend that never happened.", camera.position.x, camera.position.y-40);
+        }
         text("Your score was: " + score, camera.position.x, camera.position.y-20);
-        text("Game Over! Click anywhere to restart", camera.position.x, camera.position.y);
+        text("Click anywhere to restart", camera.position.x, camera.position.y);
     }
     else {
-        background(150, 200, 250);
+        background(0);
         player.velocity.y = player.velocity.y + GRAVITY;
 
         if (groundSprites.overlap(player)) {
@@ -47,6 +75,10 @@ function draw() {
 
         if (keyDown(UP_ARROW)) {
             player.velocity.y = JUMP;
+        }
+        if (player.position.y < 0) {
+            player.position.y = 0
+            player.velocity.y = 0
         }
 
         player.position.x = player.position.x + 5;
@@ -59,8 +91,8 @@ function draw() {
             groundSprites.add(firstGroundSprite);
         }
 
-        if (random() > .95) {
-            var obstacle = createSprite(camera.position.x + width, random(0, (height - 50) - 15), 30, 30);
+        if (random() > .98) {
+            var obstacle = createSprite(camera.position.x + width, random(0, (height - 50) - 15), size, size);
             obstacleSprites.add(obstacle);
         }
 
@@ -75,6 +107,10 @@ function draw() {
         score = score + 1;
         textAlign(CENTER);
         text(score, camera.position.x, 10);
+        
+        if (size < 100) {
+            size = 5 + score*0.025;
+        }
     }
 }
 
