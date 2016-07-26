@@ -18,7 +18,7 @@ function mouseReleased() {
     p1 = mouseX;
     p2 = mouseY;
     stroke(200);
-    strokeWeight(3);
+    strokeWidth(3);
     line(width / 2, height / 2, p1, p2);
     line(width / 2, height / 2, (width-p1), p2);
     line(width / 2, height / 2, (width-p1), (height-p2));
