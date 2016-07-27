@@ -38,7 +38,7 @@ function draw() {
     fill(color);
     for (var i = 0; i < points.length; i++) {
         var point = points[i];
-        ellipse(point.x, point.y, 5, 5);
+        ellipse(point.x, point.y, 8, 8);
     }
     if (keyIsDown(32)) {
         rv = rv + 5;
