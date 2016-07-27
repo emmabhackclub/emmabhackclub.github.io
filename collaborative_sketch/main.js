@@ -12,27 +12,41 @@
 
 var pointsData = firebase.database().ref();
 var points = [];
+var color;
 
 function setup() {
-    var canvas = createCanvas(400, 400);
-    background(255);
-    fill(0);
-    pointsData.on("child_added", function (point) {
+    var canvas = createCanvas(windowWidth, windowHeight);
+    background(0);
+    color = 200;
+    noStroke();
+    pointsData.on("child_added", function(point) {
         points.push(point.val());
     });
-    
+    pointsData.on("child_removed", function() {
+        points = [];
+    });
+
     canvas.mousePressed(drawPoint);
-    canvas.mouseMoved(function () {
+    canvas.mouseMoved(function() {
         if (mouseIsPressed) {
             drawPoint();
         }
     });
 }
 function draw() {
-    background(255);
+    background(0);
+    fill(color);
     for (var i = 0; i < points.length; i++) {
         var point = points[i];
         ellipse(point.x, point.y, 5, 5);
+    }
+    if (keyIsDown(32)) {
+        rv = rv + 5;
+        if (rv >= 250) {
+            rv = 0;
+        }
+        console.log(color);
+        
     }
 }
 
@@ -44,14 +58,37 @@ $("#saveDrawing").on("click", saveDrawing);
 
 function saveDrawing() {
     saveCanvas();
+    console.log("click");
 }
 
 $("#clearDrawing").on("click", clearDrawing);
 
 function clearDrawing() {
+       console.log("click");
     pointsData.remove();
     points = [];
 }
-pointsData.on("child_removed", function () {
-        points = [];
-    });
+
+function keyPressed() {
+    if (keyCode == 82) {
+        color = "red";
+    }
+    else if (keyCode == 79) {
+        color = "orange";
+    }
+    else if (keyCode == 89) {
+        color = "yellow";
+    }
+    else if (keyCode == 71) {
+        color = "green";
+    }
+    else if (keyCode == 66) {
+        color = "blue";
+    }
+    else if (keyCode == 80) {
+        color = "purple";
+    }
+    else {
+        color = 200;
+    }
+}
