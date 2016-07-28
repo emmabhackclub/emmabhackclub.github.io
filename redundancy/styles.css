@@ -4,6 +4,10 @@ body {
     background-color: rgb(10, 30, 100);
 }
 
+h1 {
+    font-size: 40px;
+}
+
 #randomFact {
     font-size: 24px;
     text-align: center;
