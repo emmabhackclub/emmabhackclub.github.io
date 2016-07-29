@@ -86,13 +86,13 @@ function draw() {
 setInterval(shoot, 1000);
 function shoot() {
     for (var p = 0; p < aliens.length; p++) {
-        if (random() > .98) {
+        if (random() > .995) {
             shot = createSprite(aliens[p].position.x, aliens[p].position.y + 45, 5, 20);
             shots.add(shot);
             shot.shapeColor = "white"
             shot.setSpeed(5, 90);
             
-            aliens.overlap(shots, shotLayer);
+            // shot.overlap(aliens, shotLayer);
         }
     }
 }
@@ -102,10 +102,10 @@ function hit(spriteA, spriteB) {
     console.log("hit");
 }
 
-function shotLayer(spriteA, spriteB) {
-    spriteB.remove();
-    console.log("null");
-}
+// function shotLayer(spriteA, spriteB) {
+//     spriteA.remove();
+//     console.log("null");
+// }
 
 function end(spriteA, spriteB) {
     spriteA.remove(); spriteB.remove();
