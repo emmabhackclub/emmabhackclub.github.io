@@ -1,9 +1,11 @@
 var aliens;
 var lowerx;
-var dir;
 var player;
 var projs;
+var proj;
 var shots;
+var turn;
+var dir;
 
 function preload() {
     lowerImage = loadImage("lower.png");
@@ -16,6 +18,8 @@ function setup() {
     createCanvas(600, 600);
     background(0);
     lowerX = 50
+    dir = 0;
+    turn = true;
     dir = 0;
     
     aliens = new Group();
@@ -61,53 +65,92 @@ function draw() {
     if (keyDown(LEFT_ARROW) && player.position.x > 25) {
         player.position.x -= 3;
     }
+    //player shoot
     if (keyWentDown(" ")) {
-        proj = createSprite(player.position.x, height-50, 5, 20);
-        projs.add(proj);
-        proj.shapeColor = "green"
-        proj.setSpeed(5, 270);
+        if (projs.length < 1) {
+            proj = createSprite(player.position.x, height - 50, 5, 20);
+            projs.add(proj);
+            proj.shapeColor = "green"
+            proj.setSpeed(5, 270);
+        }
+        else if (proj.position.y < -20) {
+            proj.remove();
+            proj = createSprite(player.position.x, height - 50, 5, 20);
+            projs.add(proj);
+            proj.shapeColor = "green"
+            proj.setSpeed(5, 270);
+    
+        }
     }
     
     aliens.overlap(projs, hit);
     player.overlap(shots, end);
+    shots.overlap(aliens, shotLayer);
+    
+    console.log("projs" + projs.length);
     
     drawSprites();
 }
 
 // //move aliens
-// setInterval(move, 1000);
-// function move() {
-//     for (var p = 0; p < aliens.length; p++) {
-//         aliens[p].position.x = (aliens[p].position.x + 40)
-//     }
-// }
+setInterval(move, 1500);
+function move() {
+    if (dir == 3) {
+        turn = false;
+    } if (dir == 0) {
+        turn = true;
+    }
+    if (turn) {
+    for (var p = 0; p < aliens.length; p++) {
+        aliens[p].position.x = (aliens[p].position.x + 40);
+    }
+    dir = dir + 1;
+    } else {
+        for (var p = 0; p < aliens.length; p++) {
+        aliens[p].position.x = (aliens[p].position.x - 40);
+    }
+    dir = dir - 1
+    }
+}
 
 //aliens shoot
 setInterval(shoot, 1000);
 function shoot() {
     for (var p = 0; p < aliens.length; p++) {
-        if (random() > .995) {
+        if (random() > .95) {
             shot = createSprite(aliens[p].position.x, aliens[p].position.y + 45, 5, 20);
             shots.add(shot);
+            shot.visible = false;
             shot.shapeColor = "white"
             shot.setSpeed(5, 90);
-            
-            // shot.overlap(aliens, shotLayer);
+            if (!shot.overlap(aliens)) {
+                shot.visible = true;
+            }
         }
     }
 }
 
 function hit(spriteA, spriteB) {
     spriteA.remove(); spriteB.remove();
-    console.log("hit");
 }
 
-// function shotLayer(spriteA, spriteB) {
-//     spriteA.remove();
-//     console.log("null");
-// }
-
+function shotLayer(spriteA, spriteB) {
+    spriteA.remove();
+}
+//endgame
 function end(spriteA, spriteB) {
     spriteA.remove(); spriteB.remove();
-    console.log("hit");
+        //text
+        textAlign(CENTER);
+        textFont("Arial");
+        textSize(60);
+        fill = (100, 100, 0);
+        text("GAME OVER", width/2, height/3);
+        //clear sprites
+        aliens = [];
+        shots = [];
+        projs = [];
+    setTimeout(function () {
+        location.reload();
+    }, 5000);
 }
